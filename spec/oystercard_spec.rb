@@ -11,8 +11,8 @@ describe Oystercard do
   describe '#top_up' do
     it 'tops up money on the card' do
       initial_balance = subject.balance
-      top_up_value = 50
-      expect(subject.top_up(top_up_value)).to eq (initial_balance + top_up_value)
+      amount = 50
+      expect{subject.top_up(amount)}.to change{subject.balance}.by amount
     end
   end
 
