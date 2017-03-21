@@ -22,7 +22,7 @@ attr_reader :balance, :entry_station, :history, :exit_station, :journey, :journe
 
   def touch_out(station)
     journey_log.finish(station)
-    deduct(Journey::MIN_FARE)
+    deduct(journey_log.journey.fare)
   end
 
   def in_journey?

@@ -14,15 +14,6 @@ describe Journey do
     expect(journey.exit_station).to eq station2
   end
 
-  it 'reports a journey' do
-    expect(journey.output_data).to eq ({station => station2})
-  end
-
-  it 'resets' do
-    journey.reset
-    expect(journey.output_data).to eq ({nil => nil})
-  end
-
   describe '#fare' do
 
     it 'gives a minimum fare if journey completed' do
@@ -30,8 +21,8 @@ describe Journey do
     end
 
     it 'returns penalty fare if journey incomplete' do
-      journey.reset
-      expect(journey.fare).to eq 6
+      new_journey = Journey.new
+      expect(new_journey.fare).to eq 6
     end
 
   end

@@ -1,3 +1,5 @@
+require_relative 'station'
+
 class Journey
 
   attr_reader :entry_station, :exit_station
@@ -13,17 +15,8 @@ class Journey
     self.exit_station = station
   end
 
-  def output_data
-    {entry_station => exit_station}
-  end
-
   def fare
-    illegal? ? PENALTY_FARE : MIN_FARE
-  end
-
-  def reset
-    self.entry_station = nil
-    self.exit_station = nil
+    illegal? ? PENALTY_FARE : (MIN_FARE + legal_fare)
   end
 
   private
@@ -32,6 +25,10 @@ class Journey
 
   def illegal?
     entry_station == nil || exit_station == nil
+  end
+
+  def legal_fare
+    (entry_station.zone - exit_station.zone).abs
   end
 
 end
