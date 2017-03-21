@@ -7,6 +7,7 @@ describe Oystercard do
 
   let(:station) {double(:station)}
   let(:station2) {double(:station2)}
+  let(:journey) {double(:journey)}
 
   it 'is initialised as not in journey' do
     expect(subject).not_to be_in_journey
@@ -43,10 +44,10 @@ describe Oystercard do
     it 'raises an error if less than minimum balance' do
       expect{subject.touch_in(station)}.to raise_error "Insufficient balance"
     end
-    it 'records the entry station' do
+
+    it 'creates a journey with the specified entry station' do
       subject.top_up(min_limit)
-      subject.touch_in(station)
-      expect(subject.entry_station).to eq station
+      expect(subject.touch_in(station).entry_station).to eq station
     end
 
   end
@@ -56,24 +57,27 @@ describe Oystercard do
       subject.top_up(min_limit)
       subject.touch_in(station)
     end
-    it 'updates the journey status to not in journey' do
-      subject.touch_out(station2)
-      expect(subject).not_to be_in_journey
+    context 'for inspecting behaviour and recording journey data' do
+      before do
+        subject.touch_out(station2)
+      end
+      it 'updates the journey status to not in journey' do
+        expect(subject).not_to be_in_journey
+      end
+
+#      it 'resets the entry station to nil' do
+#        expect(subject.entry_station).to be_nil
+#      end
+#      it 'records the exit station' do
+#        expect(subject.exit_station).to eq station2
+#      end
+      it 'records the journey and saves it to card history' do
+        expect(subject.history).to include({station => station2})
+      end
     end
+
     it 'deducts the minimum fare of #{min_limit}' do
       expect {subject.touch_out(station2)}.to change{subject.balance}.by(-min_limit)
-    end
-    it 'resets the entry station to nil' do
-      subject.touch_out(station2)
-      expect(subject.entry_station).to be_nil
-    end
-    it 'records the exit station' do
-      subject.touch_out(station2)
-      expect(subject.exit_station).to eq station2
-    end
-    it 'records the journey and saves it to card history' do
-      subject.touch_out(station2)
-      expect(subject.history).to include({station => station2})
     end
 
   end
