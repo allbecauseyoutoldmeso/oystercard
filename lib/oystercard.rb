@@ -5,7 +5,7 @@ attr_reader :balance, :entry_station, :history, :exit_station
   def initialize
     @balance = 0
     @entry_station = nil
-    @exit_station = nil 
+    @exit_station = nil
     @history = []
   end
 
@@ -20,8 +20,9 @@ attr_reader :balance, :entry_station, :history, :exit_station
   end
 
   def touch_out(station)
-    self.entry_station = nil
     self.exit_station = station
+    history << {entry_station => exit_station}
+    self.entry_station = nil
     deduct(MIN_LIMIT)
   end
 

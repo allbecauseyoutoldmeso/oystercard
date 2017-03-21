@@ -71,6 +71,10 @@ describe Oystercard do
       subject.touch_out(station2)
       expect(subject.exit_station).to eq station2
     end
+    it 'records the journey and saves it to card history' do
+      subject.touch_out(station2)
+      expect(subject.history).to include({station => station2})
+    end
 
   end
 
