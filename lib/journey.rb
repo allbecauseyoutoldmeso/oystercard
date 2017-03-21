@@ -4,7 +4,7 @@ class Journey
   MIN_FARE = 1
   PENALTY_FARE = 6
 
-  def initialize(entry_station)
+  def initialize(entry_station = :home)
     @entry_station = entry_station
     @exit_station = nil
   end
