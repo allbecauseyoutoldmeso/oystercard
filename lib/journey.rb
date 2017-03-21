@@ -1,6 +1,8 @@
 class Journey
 
   attr_reader :entry_station, :exit_station
+  MIN_FARE = 1
+  PENALTY_FARE = 6
 
   def initialize(entry_station)
     @entry_station = entry_station
@@ -15,13 +17,21 @@ class Journey
     {entry_station => exit_station}
   end
 
+  def fare
+    illegal? ? PENALTY_FARE : MIN_FARE
+  end
+
   def reset
-    entry_station = nil
-    exit_station = nil
+    self.entry_station = nil
+    self.exit_station = nil
   end
 
   private
 
   attr_writer :entry_station, :exit_station
+
+  def illegal?
+    entry_station == nil || exit_station == nil
+  end
 
 end

@@ -3,7 +3,7 @@ require 'oystercard'
 describe Oystercard do
 
   max_limit = Oystercard::MAX_LIMIT
-  min_limit = Oystercard::MIN_LIMIT
+  min_limit = Journey::MIN_FARE
 
   let(:station) {double(:station)}
   let(:station2) {double(:station2)}

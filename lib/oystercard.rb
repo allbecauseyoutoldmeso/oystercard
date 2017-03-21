@@ -17,7 +17,7 @@ attr_reader :balance, :entry_station, :history, :exit_station, :journey
   end
 
   def touch_in(station)
-    raise "Insufficient balance" if balance < MIN_LIMIT
+    raise "Insufficient balance" if balance < Journey::MIN_FARE
     self.journey = Journey.new(station)
   end
 
@@ -25,7 +25,7 @@ attr_reader :balance, :entry_station, :history, :exit_station, :journey
     journey.update_exit_station(station)
     history << journey.output_data
     journey.reset
-    deduct(MIN_LIMIT)
+    deduct(Journey::MIN_FARE)
   end
 
   def in_journey?
@@ -35,7 +35,6 @@ attr_reader :balance, :entry_station, :history, :exit_station, :journey
   private
 
   MAX_LIMIT = 90
-  MIN_LIMIT = 1
 
   attr_writer :balance, :entry_station, :exit_station, :journey
 
