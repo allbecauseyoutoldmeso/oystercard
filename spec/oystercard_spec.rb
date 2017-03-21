@@ -13,10 +13,6 @@ describe Oystercard do
     expect(subject).not_to be_in_journey
   end
 
-  it 'has an empty history by default' do
-    expect(subject.history).to eq []
-  end
-
   describe '#balance' do
     it 'shows the money on the card' do
       expect(subject.balance).to eq 0
@@ -63,16 +59,6 @@ describe Oystercard do
       end
       it 'updates the journey status to not in journey' do
         expect(subject).not_to be_in_journey
-      end
-
-#      it 'resets the entry station to nil' do
-#        expect(subject.entry_station).to be_nil
-#      end
-#      it 'records the exit station' do
-#        expect(subject.exit_station).to eq station2
-#      end
-      it 'records the journey and saves it to card history' do
-        expect(subject.history).to include({station => station2})
       end
     end
 

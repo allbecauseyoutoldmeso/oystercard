@@ -24,6 +24,6 @@ def current_journey
   self.journey ||= journey_class.new
 end
 
-attr_writer :current_journey, :journeys
+attr_writer :journeys
 
 end
