@@ -1,7 +1,7 @@
 # Oyster-Card Challenge
 
 * Week 2 at Makers Academy.
-* Test driven Ruby project.
+* Pair-coded, test-driven Ruby project.
 * The challenge was to recreate the logic behind an oyster card, which charges the correct amount for a journey when a user touches out, and logs successive journeys.
 * To play with the code clone this repository, navigate to the folder, open `pry` or `irb` and do something like the following...
 
